@@ -1,18 +1,8 @@
 from lmsquery import constants
-import os
 try:
     from setuptools import setup
 except ImportError:
     from distutils.core import setup
-
-
-# Utility function to read the README file.
-# Used for the long_description.  It's nice, because now 1) we have a top level
-# README file and 2) it's easier to type in the README file than to put a raw
-# string in below ...
-def read(fname):
-    return open(os.path.join(os.path.dirname(__file__), fname)).read()
-
 
 setup(
     name = "LMSQuery",
@@ -24,7 +14,7 @@ setup(
     keywords = "logitech media server lms",
     url = "https://github.com/roberteinhaus/lmsquery",
     packages=['lmsquery'],
-    long_description=read('README.md'),
+    long_description="This library provides easy to use functions to send queries to a Logitech Media Server (https://github.com/Logitech/slimserver)",
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Environment :: Console",
