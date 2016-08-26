@@ -1,7 +1,7 @@
 import urllib2
 import json
 import datetime
-from lmsquery import constants
+import constants
 
 class LMSQuery():
     def __init__(self, host=constants.LMS_HOST, port=constants.LMS_PORT, player_id=""):

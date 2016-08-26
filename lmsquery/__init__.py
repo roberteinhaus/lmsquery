@@ -1,4 +1,5 @@
+import constants
 import lmsquery
 
-def LMSQuery(host="127.0.0.1", port=9000, player_id=""):
+def LMSQuery(host=constants.LMS_HOST, port=constants.LMS_PORT, player_id=""):
     return lmsquery.LMSQuery(host, port, player_id)

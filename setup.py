@@ -1,4 +1,4 @@
-import lmsquery.constants
+from lmsquery import constants
 import os
 try:
     from setuptools import setup
@@ -16,7 +16,7 @@ def read(fname):
 
 setup(
     name = "LMSQuery",
-    version = lmsquery.constants.LMSQUERY_VERSION,
+    version = constants.LMSQUERY_VERSION,
     author = "Robert Einhaus",
     author_email = "robert@einhaus.info",
     description = ("Query library for Logitech Media Server"),
