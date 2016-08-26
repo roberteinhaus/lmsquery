@@ -5,7 +5,7 @@ This library provides easy to use functions to send queries to a Logitech Media 
 
 ### Usage Example
     import lmsquery
-    lms = lmsquery.LMSQuery('127.0.0.1', '9000') # user ip and port of lms server
+    lms = lmsquery.LMSQuery('127.0.0.1', '9000') # use ip and port of lms server
     players = lms.getPlayers()
     for player in players:
       print player['name']
