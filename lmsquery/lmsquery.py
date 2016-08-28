@@ -179,5 +179,5 @@ class LMSQuery():
     def display_all(self, line1, line2, duration = 5):
         players = self.get_players()
         for player in players:
-            self.display(player['playerid'], "display", line1, line2, duration)
+            self.display(player['playerid'], line1, line2, duration)
         
