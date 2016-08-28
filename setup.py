@@ -1,4 +1,4 @@
-from lmsquery import constants
+from lmsquery import const
 try:
     from setuptools import setup
 except ImportError:
@@ -6,7 +6,7 @@ except ImportError:
 
 setup(
     name = "LMSQuery",
-    version = constants.LMSQUERY_VERSION,
+    version = const.LMSQUERY_VERSION,
     author = "Robert Einhaus",
     author_email = "robert@einhaus.info",
     description = ("Query library for Logitech Media Server"),
@@ -14,7 +14,9 @@ setup(
     keywords = "logitech media server lms",
     url = "https://github.com/roberteinhaus/lmsquery",
     packages=['lmsquery'],
-    long_description="This library provides easy to use functions to send queries to a Logitech Media Server (https://github.com/Logitech/slimserver)",
+    long_description="This library provides easy to use functions to send \
+                      queries to a Logitech Media Server \
+                      (https://github.com/Logitech/slimserver)",
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Environment :: Console",
