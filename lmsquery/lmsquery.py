@@ -180,4 +180,27 @@ class LMSQuery():
         players = self.get_players()
         for player in players:
             self.display(player['playerid'], line1, line2, duration)
-        
+    
+    def search(self, searchstring, count=9999):
+        return self.query('', "search", 0, count)
+    
+    def search_tracks(self, searchstring, count=9999):
+        result = self.query('', "search", 0, count)
+        if 'tracks_loop' in result:
+            return result['tracks_loop']
+        else:
+            return {}
+    
+    def search_albums(self, searchstring, count=9999):
+        result = self.query('', "search", 0, count)
+        if 'albums_loop' in result:
+            return result['albums_loop']
+        else:
+            return {}
+    
+    def search_artists(self, searchstring, count=9999):
+        result = self.query('', "search", 0, count)
+        if 'contributors_loop' in result:
+            return result['contributors_loop']
+        else:
+            return {}        
