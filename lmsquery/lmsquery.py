@@ -185,22 +185,27 @@ class LMSQuery():
         return self.query('', "search", 0, count)
     
     def search_tracks(self, searchstring, count=9999):
-        result = self.query('', "search", 0, count)
+        result = self.search(searchstring, count)
         if 'tracks_loop' in result:
-            return result['tracks_loop']
+            return {"tracks_count" : result['tracks_count'],
+                    "tracks_loop" : result['tracks_loop']}
         else:
-            return {}
+            return {"tracks_count" : 0}
     
     def search_albums(self, searchstring, count=9999):
-        result = self.query('', "search", 0, count)
+        result = self.search(searchstring, count)
         if 'albums_loop' in result:
-            return result['albums_loop']
+            return {"albums_count" : result['albums_count'],
+                    "albums_loop" : result['albums_loop']}
         else:
-            return {}
+            return {"albums_count" : 0}
     
-    def search_artists(self, searchstring, count=9999):
-        result = self.query('', "search", 0, count)
+    def search_contributors(self, searchstring, count=9999):
+        result = self.search(searchstring, count)
         if 'contributors_loop' in result:
-            return result['contributors_loop']
+            return {"contributors_count" : result['contributors_count'],
+                    "contributors_loop" : result['contributors_loop']}
+            
         else:
-            return {}        
+            return {"contributors_count" : 0}
+        
