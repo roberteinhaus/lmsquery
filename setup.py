@@ -5,14 +5,14 @@ except ImportError:
     from distutils.core import setup
 
 setup(
-    name = "LMSQuery",
-    version = const.LMSQUERY_VERSION,
-    author = "Robert Einhaus",
-    author_email = "robert@einhaus.info",
-    description = ("Query library for Logitech Media Server"),
-    license = "MIT",
-    keywords = "logitech media server lms",
-    url = "https://github.com/roberteinhaus/lmsquery",
+    name="LMSQuery",
+    version=const.LMSQUERY_VERSION,
+    author="Robert Einhaus",
+    author_email="robert@einhaus.info",
+    description=("Query library for Logitech Media Server"),
+    license="MIT",
+    keywords="logitech media server lms",
+    url="https://github.com/roberteinhaus/lmsquery",
     packages=['lmsquery'],
     long_description="This library provides easy to use functions to send \
                       queries to a Logitech Media Server \
