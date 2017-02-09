@@ -5,7 +5,7 @@ import datetime
 from . import const
 
 
-class LMSQuery():
+class LMSQuery(object):
     def __init__(self, host=const.LMS_HOST, port=const.LMS_PORT, player_id=""):
         self.host = host
         self.port = port
@@ -51,7 +51,7 @@ class LMSQuery():
         return players
 
     def search(self, searchstring, count=9999):
-        return self.query('', "search", 0, count)
+        return self.query('', "search", 0, count, "term:" + searchstring)
 
     def search_tracks(self, searchstring, count=9999):
         result = self.search(searchstring, count)
@@ -106,9 +106,9 @@ class LMSQuery():
         for player in players:
             self.set_power(player['playerid'], power)
 
-    def play_album(self, player_id, id):
+    def play_album(self, player_id, album_id):
         return self.query(player_id, "playlistcontrol", "cmd:load",
-                          "album_id:" + str(id))
+                          "album_id:" + str(album_id))
 
     def play_radio(self, player_id, radio):
         return self.query(player_id, "favorites", "playlist", "play",
