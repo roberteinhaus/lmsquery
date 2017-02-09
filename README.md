@@ -1,4 +1,8 @@
 # LMSQuery
+[![PyPI Version](https://img.shields.io/pypi/v/LMSQuery.svg)](https://pypi.python.org/pypi/LMSQuery)
+[![PyPI Downloads](https://img.shields.io/pypi/dm/LMSQuery.svg)](https://pypi.python.org/pypi/LMSQuery)
+[![Health](https://landscape.io/github/roberteinhaus/lmsquery/master/landscape.svg?style=flat)](https://landscape.io/github/roberteinhaus/lmsquery/master)
+    
 **Query library for Logitech Media Server**
 
 This library provides easy to use functions to send queries to a Logitech Media Server (https://github.com/Logitech/slimserver)
