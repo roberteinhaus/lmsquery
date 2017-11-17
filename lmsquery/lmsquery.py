@@ -1,4 +1,8 @@
-import urllib2
+try:
+    from urllib.request import urlopen, Request
+except ImportError:
+    from urllib2 import urlopen, Request
+
 import json
 import datetime
 
@@ -18,8 +22,8 @@ class LMSQuery(object):
     def query(self, player_id="", *args):
         params = json.dumps({'id': 1, 'method': 'slim.request',
                              'params': [player_id, list(args)]})
-        req = urllib2.Request(self.server_url, params)
-        response = urllib2.urlopen(req)
+        req = Request(self.server_url, params)
+        response = urlopen(req)
         response_txt = response.read()
         return json.loads(response_txt)['result']
 
