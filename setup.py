@@ -14,6 +14,7 @@ setup(
     keywords="logitech media server lms",
     url="https://github.com/roberteinhaus/lmsquery",
     packages=['lmsquery'],
+    install_requires=['requests'],
     long_description="This library provides easy to use functions to send \
                       queries to a Logitech Media Server \
                       (https://github.com/Logitech/slimserver)",
