@@ -129,6 +129,13 @@ class LMSQuery(object):
               coverid = now_playing_info['coverid']
         now_playing_info['artwork_url'] = f'{self.server_base_url}music/{coverid}/cover.jpg'
 
+        # set the current time position of the now playing song
+        time = 0
+        if 'time' in status:
+            time = status['time']
+        now_playing_info['time'] = time
+
+
         return(now_playing_info)
 
 ###############################################################################
