@@ -40,11 +40,21 @@ def scanLMS():
     lmsPort = 3483
     lmsMsg = b'eJSON\0'
     lmsTimeout = 2
+<<<<<<< HEAD
     entries = []
+=======
+    
+    entries = []
+    
+>>>>>>> 9bf8743447a2ac2c24e5fa4264b987943a122549
     mySocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     mySocket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
     mySocket.settimeout(lmsTimeout)
     mySocket.bind(('', 0))
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 9bf8743447a2ac2c24e5fa4264b987943a122549
     try:
         mySocket.sendto(lmsMsg, (lmsIP, lmsPort))
         while True: # loop until the timeout expires
@@ -56,12 +66,25 @@ def scanLMS():
                         position = data.find(b'N')
                         length = int(data[position+1:position+2].hex())
                         port = int(data[position+2:position+2+length])
+<<<<<<< HEAD
                     entries.append({'host': address[0], 'port': port})
 
             except socket.timeout:
                 break
     finally:
         mySocket.close()
+=======
+                    
+                    entries.append({'host': address[0], 'port': port})
+                        
+                            
+
+            except socket.timeout:
+                break      
+    finally:
+        mySocket.close()
+    
+>>>>>>> 9bf8743447a2ac2c24e5fa4264b987943a122549
     return(entries)
 
 
