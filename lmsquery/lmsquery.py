@@ -122,7 +122,11 @@ class LMSQuery(object):
         # set default cover id to 0 (static server default image)
         coverid = 0
         if 'coverid' in now_playing_info:
-            coverid = now_playing_info['coverid']
+            # handle invalid coverids that show up as negative numbers
+            if now_playing_info['coverid'].startswith('-'):
+              pass
+            else:
+              coverid = now_playing_info['coverid']
         now_playing_info['artwork_url'] = f'{self.server_base_url}music/{coverid}/cover.jpg'
 
         return(now_playing_info)
