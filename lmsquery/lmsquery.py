@@ -94,6 +94,38 @@ class LMSQuery(object):
             response = {"players_count": count}
         return response
 
+    def now_playing(self, player_id=''):
+        '''
+        returns currently playing track including following information:
+          * album
+          * artist
+          * artwork_url (if available)
+          * duration (seconds)
+          * genre
+          * coverid
+          * id
+          * title
+        '''
+        if not player_id:
+            player_id = self.player_id
+        now_playing_info ={}
+        status = self.query(player_id, 'status')
+        playing_track = self.query(player_id, 'status', int(status['playlist_cur_index']), 1, '-')['playlist_loop'][0]
+        track_id = playing_track['id']
+        # query songinfo tags: c - coverid; d - duration; e - album_id; g - genre; l - album name
+        songinfo = self.query('', 'songinfo', 0, 100, 'track_id:'+str(track_id), 'tags:c,d,e,g,l')['songinfo_loop']
+
+        for each in songinfo:
+            for key in each:
+                now_playing_info[key] = each[key]
+        # set default cover id to 0 (static server default image)
+        coverid = 0
+        if 'coverid' in now_playing_info:
+            coverid = now_playing_info['coverid']
+        now_playing_info['artwork_url'] = f'{self.server_url}/music/{coverid}/cover.jpg'
+
+        return(now_playing_info)
+
 ###############################################################################
 # Player commands
 ###############################################################################
