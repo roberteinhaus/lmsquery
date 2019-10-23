@@ -10,7 +10,8 @@ class LMSQuery(object):
     def __init__(self, host=const.LMS_HOST, port=const.LMS_PORT, player_id=""):
         self.host = host
         self.port = port
-        self.server_url = "http://%s:%s/jsonrpc.js" % (self.host, self.port)
+        self.server_base_url = f'http://{self.host}:{self.port}/'
+        self.server_url = f'{self.server_base_url}jsonrpc.js'
         self.player_id = player_id
 
 ###############################################################################
@@ -122,7 +123,7 @@ class LMSQuery(object):
         coverid = 0
         if 'coverid' in now_playing_info:
             coverid = now_playing_info['coverid']
-        now_playing_info['artwork_url'] = f'{self.server_url}/music/{coverid}/cover.jpg'
+        now_playing_info['artwork_url'] = f'{self.server_base_url}music/{coverid}/cover.jpg'
 
         return(now_playing_info)
 
