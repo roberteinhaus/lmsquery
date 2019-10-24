@@ -113,8 +113,8 @@ class LMSQuery(object):
         status = self.query(player_id, 'status')
         playing_track = self.query(player_id, 'status', int(status['playlist_cur_index']), 1, '-')['playlist_loop'][0]
         track_id = playing_track['id']
-        # query songinfo tags: c - coverid; d - duration; e - album_id; g - genre; l - album name
-        songinfo = self.query('', 'songinfo', 0, 100, 'track_id:'+str(track_id), 'tags:c,d,e,g,l')['songinfo_loop']
+        # query songinfo tags: a - artist; c - coverid; d - duration; e - album_id; g - genre; l - album name
+        songinfo = self.query('', 'songinfo', 0, 100, 'track_id:'+str(track_id), 'tags:a,c,d,e,g,l')['songinfo_loop']
 
         for each in songinfo:
             for key in each:
