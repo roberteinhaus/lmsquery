@@ -110,10 +110,14 @@ class LMSQuery(object):
         if not player_id:
             player_id = self.player_id
         now_playing_info ={}
+        
+        #keys from status dict to return in the now-playing dictionary
+        status_keys = ['time', 'mode']
+
         status = self.query(player_id, 'status')
         playing_track = self.query(player_id, 'status', int(status['playlist_cur_index']), 1, '-')['playlist_loop'][0]
         track_id = playing_track['id']
-        # query songinfo tags: a - artist; c - coverid; d - duration; e - album_id; g - genre; l - album name
+        # query songinfo tags: a - artist, c - coverid; d - duration; e - album_id; g - genre; l - album name
         songinfo = self.query('', 'songinfo', 0, 100, 'track_id:'+str(track_id), 'tags:a,c,d,e,g,l')['songinfo_loop']
 
         for each in songinfo:
@@ -122,19 +126,19 @@ class LMSQuery(object):
         # set default cover id to 0 (static server default image)
         coverid = 0
         if 'coverid' in now_playing_info:
-            # handle invalid coverids that show up as negative numbers
+            # handle invalid coverids that show up as negative nubmers
             if now_playing_info['coverid'].startswith('-'):
-              pass
+                pass
             else:
-              coverid = now_playing_info['coverid']
+                coverid = now_playing_info['coverid']
         now_playing_info['artwork_url'] = f'{self.server_base_url}music/{coverid}/cover.jpg'
-
-        # set the current time position of the now playing song
-        time = 0
-        if 'time' in status:
-            time = status['time']
-        now_playing_info['time'] = time
-
+        
+        
+        for key in status_keys:
+            if key in status:
+                now_playing_info[key] = status[key]
+            else:
+                now_playing_info[key] = None
 
         return(now_playing_info)
 
