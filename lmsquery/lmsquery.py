@@ -7,11 +7,76 @@ from . import const
 
 
 class LMSQuery(object):
-    def __init__(self, host=const.LMS_HOST, port=const.LMS_PORT, player_id=""):
+    '''Create an LMSQuery object that allows easy querying of LMS Servers
+    
+    '''
+    def __init__(self, host=None, port=None, player_id="", lms_servers=[]):
+        '''
+        
+        Args:
+            host: (str) Logitech Media Server host name or ip address to use for queries
+            port: (int) Port number for LMS Server
+            player_id: (str) id (in hex) of one player; default is an empty string
+                68:5b:35:b5:97:bf
+            lms_servers: (list of dict) list of available LMS servers
+                [{'host': 'name1/ip1', 'port': 9000}, {'host': 'name2/ip2', 'port': 9001}] 
+                if no servers are specified LMSQuery will attempt to scan the local network
+                for scanners using scanLMS.scanLMS() 
+                if no servers are found, this is set to [{'host': '127.0.0.1', 'port': 9000}]
+                
+        Attributes:
+            server_url: (string) http://host:port/jasonrpc.js - url for making JSON requests
+        '''
+        self.lms_servers = lms_servers
         self.host = host
         self.port = port
         self.server_url = "http://%s:%s/jsonrpc.js" % (self.host, self.port)
         self.player_id = player_id
+
+    @property
+    def lms_servers(self):
+        ''':list: of :dict: of available LMS servers
+            [{'host': 'name1/ip1', 'port': 9000}, {'host': 'name2/ip2', 'port': 9001}]
+            
+            list is set using scanLMS.scanLMS() if no servers are provided'''
+        return self._lms_servers
+    
+    @lms_servers.setter
+    def lms_servers(self, lms_servers):
+        if not lms_servers:
+            lms_servers = scanLMS.scanLMS()
+        if not lms_servers:
+            lms_servers.append({'host': const.LMS_HOST, 'port': const.LMS_PORT})
+        self._lms_servers = lms_servers
+        
+    @property
+    def host(self):
+        ''':str: hostname or ip address of LMS server to use
+            if none is provided, the first LMS server in self.lms_servers is used
+        
+        '''
+        return self._host
+    
+    @host.setter
+    def host(self, host):
+        if not host:
+            host = self.lms_servers[0]['host']
+        self._host = host     
+            
+    @property
+    def port(self):
+        ''':str: port of LMS server to use
+            if none is provided, the first LMS server in self.lms_servers is used
+   
+        '''
+        
+        return self._port
+    
+    @port.setter
+    def port(self, port):
+        if not port:
+            port = self.lms_servers[0]['port']
+        self._port = port
 
 ###############################################################################
 # Generic query
