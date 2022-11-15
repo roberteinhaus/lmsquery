@@ -11,6 +11,7 @@ class LMSQuery(object):
         self.host = host
         self.port = port
         self.server_url = "http://%s:%s/jsonrpc.js" % (self.host, self.port)
+        self.session = requests.Session()   # re-use connection
         self.player_id = player_id
         self.timeout = timeout
 
