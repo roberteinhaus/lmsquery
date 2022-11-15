@@ -15,7 +15,6 @@ class LMSQuery(object):
         self.player_id = player_id
         self.timeout = timeout
 
-
 ###############################################################################
 # Generic query
 ###############################################################################s
@@ -24,7 +23,6 @@ class LMSQuery(object):
                              'params': [player_id, list(args)]})
         r = self.session.post(self.server_url, params, timeout=self.timeout)
         return json.loads(r.text)['result']
-
 
 ###############################################################################
 # Server commands
