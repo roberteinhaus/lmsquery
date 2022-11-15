@@ -5,13 +5,15 @@ import datetime
 
 from . import const
 
-
 class LMSQuery(object):
-    def __init__(self, host=const.LMS_HOST, port=const.LMS_PORT, player_id=""):
+    def __init__(self, host=const.LMS_HOST, port=const.LMS_PORT, player_id="", 
+                 timeout=2):
         self.host = host
         self.port = port
         self.server_url = "http://%s:%s/jsonrpc.js" % (self.host, self.port)
         self.player_id = player_id
+        self.timeout = timeout
+
 
 ###############################################################################
 # Generic query
@@ -19,8 +21,9 @@ class LMSQuery(object):
     def query(self, player_id="", *args):
         params = json.dumps({'id': 1, 'method': 'slim.request',
                              'params': [player_id, list(args)]})
-        r = requests.post(self.server_url, params)
+        r = self.session.post(self.server_url, params, timeout=self.timeout)
         return json.loads(r.text)['result']
+
 
 ###############################################################################
 # Server commands
